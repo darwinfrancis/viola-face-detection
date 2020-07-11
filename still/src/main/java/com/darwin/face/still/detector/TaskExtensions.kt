@@ -1,0 +1,44 @@
+/*
+ * Copyright 2020 Google LLC. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.darwin.face.still.detector
+
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
+import java.util.concurrent.Executor
+
+/**
+ * Quality-of-life helper to allow using trailing lambda syntax for adding a success listener to a
+ * [Task].
+ */
+internal fun <TResult> Task<TResult>.addOnSuccessListener(
+    executor: Executor,
+    listener: (TResult) -> Unit
+): Task<TResult> {
+    return addOnSuccessListener(executor, OnSuccessListener(listener))
+}
+
+/**
+ * Quality-of-life helper to allow using trailing lambda syntax for adding a failure listener to a
+ * [Task].
+ */
+internal fun <TResult> Task<TResult>.addOnFailureListener(
+    executor: Executor,
+    listener: (Exception) -> Unit
+): Task<TResult> {
+    return addOnFailureListener(executor, OnFailureListener(listener))
+}
