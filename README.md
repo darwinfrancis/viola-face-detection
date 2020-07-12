@@ -1,4 +1,6 @@
 # face-perception
+[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+
 Foobar is a Android library for dealing with word pluralization.
 
 ## Getting Started
@@ -81,6 +83,27 @@ Face Detector is currently extended with the following configurations. Instructi
 | `cropAlgorithm` |  algorithm used for cropping face | CropAlgorithm | CropAlgorithm.THREE_BY_FOUR |
 | `minFaceSize` |  sets the smallest desired face size in percentage | int | 10 |
 | `debug` |  enables debug lof | boolean | false |
+
+> CropAlgorithm.THREE_BY_FOUR : Crops the image in three by four ratio
+
+> CropAlgorithm.SQUARE        : Crops the image in square(useful when showing face in circular view)
+
+> CropAlgorithm.LEAST         : Crops the face with minimum possible face area(possibly reduce face overlaps when detecting multiple faces )
+
+### Face detection result
+Face Detector provides the following values in Result class
+
+| Result | Description | Type |
+| :--- | :--- | :--- |
+| `faceCount` |  number of faces croped | int |
+| `facePortraits` |  list of face data croped | FacePortrait |
+| `face` |  bitmap of the cropped face  | Bitmap |
+| `smileProbability` |  giving a probability that the face is smiling  | Float |
+| `leftEyeOpenProbability` |  giving a probability that the face's left eye is open  | Float |
+| `rightEyeOpenProbability` |  giving a probability that the face's right eye is open  | Float |
+| `pixelBetweenEyes` |  number of pixels between the eyes  | Double |
+| `faceSizePercentage` |  the size of face relative to the input image  | Float |
+| `facePose` |  provides rotation of face in X,Y,Z plan  | FacePose |
 
 ## Author
 Darwin Francis - @darwinfrancis on GitHub, @darwin-francis on linkedin
