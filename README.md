@@ -4,10 +4,11 @@
 Foobar is a Android library for dealing with word pluralization.
 
 ## Getting Started
-### Compatibility
+**Compatibility**
  * *Minimum Android SDK* : face-perception 1.0.0 requires a minimum API level of 21.
 
-### Installation
+**Installation**
+
 Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/face-perception-still/com.darwin.face.still/1.0.2) or grab via
 
 Gradle:
