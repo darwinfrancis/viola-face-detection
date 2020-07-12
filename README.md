@@ -27,6 +27,7 @@ or Maven:
 
 
 ## Usage
+**Kotlin**
 ```kotlin
 val faceDetector = FaceDetector(listener)
 faceDetector.detectFace(bitmap)
@@ -46,6 +47,29 @@ val faceOption =
                .enableDebug()
                .build()
 faceDetector.detectFace(bitmap,faceOption)
+```
+
+
+**Java**
+```java
+FaceDetector faceDetector = new FaceDetector(listener);
+faceDetector.detectFace(bitmap);
+
+private final FaceDetectionListener listener = new FaceDetectionListener() {
+        @Override
+        public void onFaceDetected(@NotNull Result result) { }
+
+        @Override
+        public void onFaceDetectionFailed(@NotNull FaceDetectionError error, @NotNull String message) { }
+};
+```
+*with FaceOptions*
+```java
+FaceOptions faceOptions = new FaceOptions.Builder()
+                .enableProminentFaceDetection()
+                .enableDebug()
+                .build();
+faceDetector.detectFace(bitmap,faceOptions);
 ```
 
 ### Configure the face detector
