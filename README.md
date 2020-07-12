@@ -27,14 +27,45 @@ or Maven:
 
 
 ## Usage
-```python
-import foobar
+```kotlin
+val faceDetector = FaceDetector(listener)
+faceDetector.detectFace(bitmap)
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+private val listener: FaceDetectionListener = object : FaceDetectionListener {
+
+        override fun onFaceDetected(result: Result) {}
+
+        override fun onFaceDetectionFailed(error: FaceDetectionError, message: String) {}
+}
+```
+*with FaceOptions*
+```kotlin
+val faceOption =
+    FaceOptions.Builder()
+               .enableProminentFaceDetection()
+               .enableDebug()
+               .build()
+faceDetector.detectFace(bitmap,faceOption)
 ```
 
+### Configure the face detector
+Face Detector is currently extended with the following configurations. Instructions on how to use them in your own application are linked below.
+
+| FaceOptions | Description | Type | Default |
+| :--- | :--- | :--- | :--- |
+| `prominentFaceDetection` |  crops a single "prominent face only | boolean | false |
+| `cropAlgorithm` |  algorithm used for cropping face | CropAlgorithm | CropAlgorithm.THREE_BY_FOUR |
+| `minFaceSize` |  sets the smallest desired face size in percentage | int | 10 |
+| `debug` |  enables debug lof | boolean | false |
+
+## Author
+Darwin Francis - @darwinfrancis on GitHub, @darwin-francis on linkedin
+
+## Roadmap
+If you have ideas for releases in the future, it is a good idea to list them in the README.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 License
 -------
