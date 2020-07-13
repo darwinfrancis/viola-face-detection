@@ -99,7 +99,7 @@ class RegressionTestActivity : AppCompatActivity() {
         val faceOption =
             FaceOptions.Builder()
                 .cropAlgorithm(cropAlgorithm)
-                .setMinimumFaceSize(10)
+                .setMinimumFaceSize(4)
                 .enableDebug()
                 .build()
 

@@ -165,10 +165,12 @@ internal class FaceAnalyser {
 
                 //if input image doesn't have require height to make cropped bitmap square, reducing result image width
                 if (cropAlgorithm == CropAlgorithm.SQUARE) {
-                    finalStartX += excessHeight
+                    finalStartX += (excessHeight / 2)
                     finalWidth -= excessHeight
                 } else {
                     val newWidth = finalHeight * 0.75
+                    val weightDiff = finalHeight - newWidth
+                    finalStartX += (weightDiff / 2).toInt()
                     finalWidth = newWidth.toInt()
                 }
             }
@@ -179,7 +181,7 @@ internal class FaceAnalyser {
 
                 //if input image doesn't have require width to make cropped bitmap square, reducing result image height
                 if (cropAlgorithm == CropAlgorithm.SQUARE) {
-                    finalStartY += excessWidth
+                    finalStartY += (excessWidth / 2)
                     finalHeight -= excessWidth
                 } else {
                     val newHeight = finalWidth / 0.75
@@ -221,8 +223,13 @@ internal class FaceAnalyser {
         if (startY < 0) {
             startY = 0
         }
+
         if ((startY + height) > bitmap.height) {
             height = bitmap.height - startY
+        }
+
+        if ((startX + width) > bitmap.width) {
+            width = bitmap.width - startX
         }
 
         //converting width,height to multiple of 8
