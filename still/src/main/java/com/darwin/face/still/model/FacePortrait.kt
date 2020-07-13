@@ -3,7 +3,7 @@ package com.darwin.face.still.model
 import android.graphics.Bitmap
 
 /**
- * The class FacePo
+ * The class FacePortrait
  *
  * @author Darwin Francis
  * @version 1.0

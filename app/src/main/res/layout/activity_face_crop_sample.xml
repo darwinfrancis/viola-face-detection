@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    tools:context=".FaceCropSampleActivity">
+
+    <RadioGroup
+        android:id="@+id/radio_algorithm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_3by4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Three by Four" />
+
+        <RadioButton
+            android:id="@+id/rb_square"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Square" />
+
+        <RadioButton
+            android:id="@+id/rb_least"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Least" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/iv_input_image"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/radio_algorithm" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCroppedImages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btCrop"
+        android:layout_below="@id/iv_input_image" />
+
+    <Button
+        android:id="@+id/btCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:stateListAnimator="@null"
+        android:text="CROP" />
+
+</RelativeLayout>

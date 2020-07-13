@@ -32,6 +32,7 @@ class FaceDetector(private val faceDetectionListener: FaceDetectionListener) {
     }
 
 
+    @JvmOverloads
     fun detectFace(image: Bitmap, option: FaceOptions = getDefaultFaceOptions()) {
         Util.debug = option.debug
         if (isValidInputImage(image)) {

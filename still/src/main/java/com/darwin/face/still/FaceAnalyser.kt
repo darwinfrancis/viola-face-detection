@@ -2,7 +2,6 @@ package com.darwin.face.still
 
 import android.graphics.Bitmap
 import android.graphics.PointF
-import android.util.Log
 import com.darwin.face.still.model.CropAlgorithm
 import com.darwin.face.still.model.FaceOptions
 import com.darwin.face.still.model.FacePortrait
@@ -10,7 +9,6 @@ import com.darwin.face.still.model.FacePose
 import com.google.android.gms.vision.face.Landmark
 import com.google.mlkit.vision.face.Face
 import java.util.*
-import kotlin.math.min
 import kotlin.math.sqrt
 
 /**
@@ -48,7 +46,7 @@ internal class FaceAnalyser {
                 getProminentFace(faces)!!,
                 bitmap,
                 faceOptions.cropAlgorithm,
-                faceOptions.minFaceSize
+                faceOptions.minimumFaceSize
             )
         if (portrait != null) {
             Util.printLog("Face crop succeeded with {CropAlgorithm.${faceOptions.cropAlgorithm})} algorithm.")
@@ -66,7 +64,7 @@ internal class FaceAnalyser {
         val facePortraits: MutableList<FacePortrait> = mutableListOf()
         faces.forEach {
             val portrait =
-                processFace(it, bitmap, faceOptions.cropAlgorithm, faceOptions.minFaceSize)
+                processFace(it, bitmap, faceOptions.cropAlgorithm, faceOptions.minimumFaceSize)
             if (portrait != null) {
                 Util.printLog("Face crop succeeded with {CropAlgorithm.${faceOptions.cropAlgorithm}} algorithm.")
                 facePortraits.add(portrait)
@@ -83,20 +81,26 @@ internal class FaceAnalyser {
         minFaceSize: Int
     ): FacePortrait? {
         Util.printLog("Processing face with {CropAlgorithm.$cropAlgorithm} algorithm.")
-        val faceSize = getFaceSizePercentage(face, bitmap, cropAlgorithm)
+        var faceSize = getFaceSizePercentage(face, bitmap, cropAlgorithm)
         if (faceSize >= minFaceSize) {
             val portraitData = cropFace(face, bitmap, cropAlgorithm)
+            val croppedBitmap = portraitData.first
             val smileProbability = face.smilingProbability!!.roundFloat()
             val leftEyeOpenProbability = face.leftEyeOpenProbability!!.roundFloat()
             val rightEyeOpenProbability = face.rightEyeOpenProbability!!.roundFloat()
             val pixelBetweenEyes = portraitData.second.roundDouble()
+            faceSize = getAreaOfFaceRelativeToBitmap(
+                croppedBitmap.width.toFloat(),
+                croppedBitmap.height.toFloat(),
+                bitmap
+            )
             val facePose = FacePose(
                 eulerValueToAngle(face.headEulerAngleX),
                 eulerValueToAngle(face.headEulerAngleY),
                 eulerValueToAngle(face.headEulerAngleZ)
             )
             return FacePortrait(
-                portraitData.first,
+                croppedBitmap,
                 smileProbability,
                 leftEyeOpenProbability,
                 rightEyeOpenProbability,
@@ -120,10 +124,10 @@ internal class FaceAnalyser {
             return cropFaceByLeastAlgorithm(face, bitmap)
         } else {
             val eyeDistance = getPixelBetweenEyes(face)
-            var width: Float
-            var height: Float
+            val width: Float
+            val height: Float
             if (cropAlgorithm == CropAlgorithm.SQUARE) {
-                val tempWidth = (eyeDistance / 0.25).toFloat()
+                val tempWidth = (eyeDistance / 0.30).toFloat()
                 height = (tempWidth / 0.75).toFloat()
                 width = height
             } else {
@@ -143,43 +147,57 @@ internal class FaceAnalyser {
 
             var faceStartX = (eyeMidPoint.x - width / 2).toInt()
             faceStartX = faceStartX.coerceAtLeast(0)
-            val faceUpperHeight = (0.6 * width).toInt() + 1
+            val upperHeightRatio = if (cropAlgorithm == CropAlgorithm.THREE_BY_FOUR) 0.6 else 0.5
+            val faceUpperHeight = (upperHeightRatio * width).toInt() + 1
             var faceStartY = (eyeMidPoint.y - faceUpperHeight).toInt()
             faceStartY = faceStartY.coerceAtLeast(0)
 
 
-            //cross checking final image width and height
-            width =
-                if (faceStartX + width > bitmap.width) bitmap.width.toFloat() else width
-            height =
-                if (faceStartY + height > bitmap.height) bitmap.height.toFloat() else height
-
-
-            //converting width,height to multiple of 8
-            val widthRemainder = width % 8
-            val heightRemainder = height % 8
-            if (widthRemainder != 0f) {
-                width -= widthRemainder
-            }
-            if (heightRemainder != 0f) {
-                height -= heightRemainder
-            }
-
-
             //finding image coordinates for final bitmap
-            val finalStartX = faceStartX
+            var finalStartX = faceStartX
             var finalWidth = width.toInt()
-            val finalStartY = faceStartY
+            var finalStartY = faceStartY
             var finalHeight = height.toInt()
 
             if (finalStartY + finalHeight > bitmap.height) {
                 val excessHeight: Int = finalStartY + finalHeight - bitmap.height
                 finalHeight -= excessHeight
+
+                //if input image doesn't have require height to make cropped bitmap square, reducing result image width
+                if (cropAlgorithm == CropAlgorithm.SQUARE) {
+                    finalStartX += excessHeight
+                    finalWidth -= excessHeight
+                } else {
+                    val newWidth = finalHeight * 0.75
+                    finalWidth = newWidth.toInt()
+                }
             }
 
             if (finalStartX + finalWidth > bitmap.width) {
                 val excessWidth: Int = finalStartX + finalWidth - bitmap.width
                 finalWidth -= excessWidth
+
+                //if input image doesn't have require width to make cropped bitmap square, reducing result image height
+                if (cropAlgorithm == CropAlgorithm.SQUARE) {
+                    finalStartY += excessWidth
+                    finalHeight -= excessWidth
+                } else {
+                    val newHeight = finalWidth / 0.75
+                    val heightDiff = finalHeight - newHeight
+                    finalStartY += (heightDiff / 2).toInt()
+                    finalHeight = newHeight.toInt()
+                }
+            }
+
+
+            //converting width,height to multiple of 8
+            val widthRemainder = finalWidth % 8
+            val heightRemainder = finalHeight % 8
+            if (widthRemainder != 0) {
+                finalWidth -= widthRemainder
+            }
+            if (heightRemainder != 0) {
+                finalHeight -= heightRemainder
             }
 
             val croppedBitmap =
@@ -187,6 +205,7 @@ internal class FaceAnalyser {
             return Pair(croppedBitmap, eyeDistance)
         }
     }
+
 
     private fun cropFaceByLeastAlgorithm(
         face: Face,
@@ -198,6 +217,7 @@ internal class FaceAnalyser {
         val heightBottomOffset = heightTopOffset / 2
         val startX = face.boundingBox.left
         var startY = face.boundingBox.top - heightTopOffset
+        var width = face.boundingBox.width()
         var height = face.boundingBox.height() + heightTopOffset + heightBottomOffset
         if (startY < 0) {
             startY = 0
@@ -205,11 +225,22 @@ internal class FaceAnalyser {
         if ((startY + height) > bitmap.height) {
             height = bitmap.height - startY
         }
+
+        //converting width,height to multiple of 8
+        val widthRemainder = width % 8
+        val heightRemainder = height % 8
+        if (widthRemainder != 0) {
+            width -= widthRemainder
+        }
+        if (heightRemainder != 0) {
+            height -= heightRemainder
+        }
+
         val croppedBitmap = Bitmap.createBitmap(
             bitmap,
             startX,
             startY,
-            face.boundingBox.width(),
+            width,
             height
         )
         return Pair(croppedBitmap, eyeDistance)
@@ -250,6 +281,10 @@ internal class FaceAnalyser {
             }
         }
 
+        return getAreaOfFaceRelativeToBitmap(width, height, bitmap)
+    }
+
+    private fun getAreaOfFaceRelativeToBitmap(width: Float, height: Float, bitmap: Bitmap): Float {
         val areaOfFace = width * height
         val areaOfInputImage = bitmap.width * bitmap.height
         return (areaOfFace * 100) / areaOfInputImage

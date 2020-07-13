@@ -8,11 +8,30 @@
     android:padding="12dp"
     tools:context=".StillImageSampleActivity">
 
-    <Button
-        android:id="@+id/bt_detect"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detect" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_detect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detect" />
+
+        <Button
+            android:id="@+id/bt_crop_algorithm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_org_image"
+        android:layout_width="250dp"
+        android:layout_height="180dp"/>
+
 
     <ScrollView
         android:layout_width="match_parent"

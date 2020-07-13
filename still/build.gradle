@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode buildVersionCode()
+        versionName version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -39,3 +39,30 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+ext {
+    bintrayRepo = 'face-perception-still' // Repo name in bintray dashboard
+    bintrayName = 'com.darwin.face.still' // package name of the bintray repo
+
+    publishedGroupId = 'com.darwin.face.still'   // this is the ID we want to see in implementation line
+    libraryName = 'facestill'     // this is the module name of library
+    artifact = 'still'        // this is the artifact we want to see in implementation line
+
+    libraryDescription = 'Face detection library description' // description of library
+
+    siteUrl = 'https://github.com/darwinfrancis/face-perception'    // git repo url
+    gitUrl = 'https://github.com/darwinfrancis/face-perception.git' // git repo vcs url
+
+    libraryVersion = '1.0.2'      // library version
+
+    developerId = 'darwinfrancis'                // This is your bintray username
+    developerName = 'Darwin Francis'              // Developer's name
+    developerEmail = 'darwinfrancis13@gmail.com'                // Developer's email
+
+    licenseName = 'The MIT License'  // for example, The Apache Software License, Version 2.0
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'   // for example, http://www.apache.org/licenses/LICENSE-2.0.txt
+    allLicenses = ["Apache-2.0"]    // array of licenses, for example, ["Apache-2.0"]
+}
+
+
+apply from: 'publish.gradle'

@@ -52,7 +52,6 @@ internal class FaceDetectorProcessor(
 
     override fun onSuccess(results: List<Face>, originalImage: Bitmap) {
         Util.printLog("Face detection process completed without exceptions.")
-        stop()
         if (results.isEmpty()) {
             Util.printLog("Face detector can't find any face on the given image.")
             faceDetectionListener.onFaceDetectionFailed(
