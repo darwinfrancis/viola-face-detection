@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D4D6D6"
     android:padding="5dp"
     tools:context=".FaceCropSampleActivity">
 
@@ -17,43 +18,72 @@
             android:id="@+id/rb_3by4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Three by Four" />
+            android:checked="true"
+            android:text="@string/rb_three_by_four" />
 
         <RadioButton
             android:id="@+id/rb_square"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Square" />
+            android:text="@string/rb_square" />
 
         <RadioButton
             android:id="@+id/rb_least"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Least" />
+            android:text="@string/rb_least" />
     </RadioGroup>
 
-    <ImageView
-        android:id="@+id/iv_input_image"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_below="@+id/radio_algorithm" />
+    <LinearLayout
+        android:id="@+id/ll_original_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radio_algorithm"
+        android:background="#F86B62"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/iv_input_image"
+            android:layout_width="250dp"
+            android:layout_height="175dp"
+            android:background="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btCrop"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_marginStart="4dp"
+            android:background="#4C4E4E"
+            android:stateListAnimator="@null"
+            android:text="@string/bt_crop"
+            android:textColor="#E2E6E6"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCroppedImages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btCrop"
-        android:layout_below="@id/iv_input_image" />
+        android:layout_below="@id/ll_original_image"
+        android:layout_marginTop="6dp"
+        android:background="#FF9800"
+        android:overScrollMode="never" />
 
-    <Button
-        android:id="@+id/btCrop"
+    <TextView
+        android:id="@+id/tvErrorMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:stateListAnimator="@null"
-        android:text="CROP" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:textSize="16sp" />
+
 
 </RelativeLayout>

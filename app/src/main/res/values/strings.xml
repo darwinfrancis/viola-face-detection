@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Face Detector</string>
+    <string name="rb_three_by_four">Three by Four</string>
+    <string name="rb_square">Square</string>
+    <string name="rb_least">Least</string>
+    <string name="bt_crop">CROP</string>
 </resources>

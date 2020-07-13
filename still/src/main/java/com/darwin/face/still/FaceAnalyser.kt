@@ -189,7 +189,6 @@ internal class FaceAnalyser {
                 }
             }
 
-
             //converting width,height to multiple of 8
             val widthRemainder = finalWidth % 8
             val heightRemainder = finalHeight % 8

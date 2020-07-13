@@ -3,7 +3,7 @@ package com.darwin.facedetector
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -21,6 +21,7 @@ class FaceCropSampleActivity : AppCompatActivity() {
     private lateinit var staggeredLayoutManager: StaggeredGridLayoutManager
     private val faceListAdapter = FacePhotoAdapter()
     private var bitmap: Bitmap? = null
+    private var cropAlgorithm = CropAlgorithm.THREE_BY_FOUR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +40,19 @@ class FaceCropSampleActivity : AppCompatActivity() {
 
     private fun setEventListeners() {
         btCrop.setOnClickListener {
+            val radioButtonID: Int = radio_algorithm.checkedRadioButtonId
+            val radioButton: View = radio_algorithm.findViewById(radioButtonID)
+            val algorithmIndex: Int = radio_algorithm.indexOfChild(radioButton)
+            cropAlgorithm = getAlgorithmByIndex(algorithmIndex)
             crop()
         }
+    }
+
+    private fun getAlgorithmByIndex(index: Int): CropAlgorithm = when (index) {
+        0 -> CropAlgorithm.THREE_BY_FOUR
+        1 -> CropAlgorithm.SQUARE
+        2 -> CropAlgorithm.LEAST
+        else -> CropAlgorithm.THREE_BY_FOUR
     }
 
     private fun prepareFaceCropper() {
@@ -49,7 +61,7 @@ class FaceCropSampleActivity : AppCompatActivity() {
         options.inScaled = false
         bitmap = BitmapFactory.decodeResource(
             resources,
-            R.drawable.double_face, options
+            R.drawable.multi_face, options
         )
         iv_input_image.setImageBitmap(bitmap)
     }
@@ -57,7 +69,7 @@ class FaceCropSampleActivity : AppCompatActivity() {
     private fun crop() {
         val faceOption =
             FaceOptions.Builder()
-                .cropAlgorithm(CropAlgorithm.THREE_BY_FOUR)
+                .cropAlgorithm(cropAlgorithm)
                 .setMinimumFaceSize(6)
                 .enableDebug()
                 .build()
@@ -68,14 +80,10 @@ class FaceCropSampleActivity : AppCompatActivity() {
 
         override fun onFaceDetected(result: Result) {
             faceListAdapter.bindData(result.facePortraits)
-            result.facePortraits.forEach {
-                val ratio : Float = it.face.width.toFloat() / it.face.height.toFloat()
-                Log.e("Ratio", "Ratio : $ratio")
-            }
         }
 
-
         override fun onFaceDetectionFailed(error: FaceDetectionError, message: String) {
+            tvErrorMessage.text = message
         }
     }
 
