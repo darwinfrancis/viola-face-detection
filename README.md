@@ -16,7 +16,7 @@ Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/face-pe
 Gradle:
 ```gradle
 dependencies {
-  implementation 'com.darwin.face.still:still:1.0.2'
+  implementation 'com.darwin.viola:still:1.0.0'
 }
 ```
 
@@ -24,9 +24,10 @@ or Maven:
 
 ```xml
 <dependency>
-  <groupId>com.squareup.picasso</groupId>
-  <artifactId>picasso</artifactId>
-  <version>2.71828</version>
+  <groupId>com.darwin.viola</groupId>
+  <artifactId>still</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
 </dependency>
 ```
 
