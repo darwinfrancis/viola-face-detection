@@ -1,11 +1,13 @@
-# face-perception
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+# Viola
+[![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
+[![API](https://img.shields.io/badge/API-21+-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/darwinfrancis/face-perception/blob/master/LICENSE.txt)
 
-Foobar is a Android library for dealing with word pluralization.
+With Viola face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.
 
 ## Getting Started
 **Compatibility**
- * *Minimum Android SDK* : face-perception 1.0.0 requires a minimum API level of 21.
+ * *Minimum Android SDK* : Viola 1.0.0 requires a minimum API level of 21.
 
 **Installation**
 
@@ -32,8 +34,8 @@ or Maven:
 ## Usage
 **Kotlin**
 ```kotlin
-val faceDetector = FaceDetector(listener)
-faceDetector.detectFace(bitmap)
+val viola = Viola(listener)
+viola.detectFace(bitmap)
 
 private val listener: FaceDetectionListener = object : FaceDetectionListener {
 
@@ -49,14 +51,14 @@ val faceOption =
                .enableProminentFaceDetection()
                .enableDebug()
                .build()
-faceDetector.detectFace(bitmap,faceOption)
+viola.detectFace(bitmap,faceOption)
 ```
 
 
 **Java**
 ```java
-FaceDetector faceDetector = new FaceDetector(listener);
-faceDetector.detectFace(bitmap);
+Viola viola = new Viola(listener);
+viola.detectFace(bitmap);
 
 private final FaceDetectionListener listener = new FaceDetectionListener() {
         @Override
@@ -72,45 +74,45 @@ FaceOptions faceOptions = new FaceOptions.Builder()
                 .enableProminentFaceDetection()
                 .enableDebug()
                 .build();
-faceDetector.detectFace(bitmap,faceOptions);
+viola.detectFace(bitmap,faceOptions);
 ```
 
 ### Configure the face detector
-Face Detector is currently extended with the following configurations. Instructions on how to use them in your own application are linked below.
+Viola is currently extended with the following configurations. Instructions on how to use them in your own application are linked below.
 
 | FaceOptions | Description | Type | Default |
 | :--- | :--- | :--- | :--- |
-| `prominentFaceDetection` |  crops a single "prominent face only | boolean | false |
-| `cropAlgorithm` |  algorithm used for cropping face | CropAlgorithm | CropAlgorithm.THREE_BY_FOUR |
-| `minFaceSize` |  sets the smallest desired face size in percentage | int | 10 |
-| `debug` |  enables debug lof | boolean | false |
+| `prominentFaceDetection` |  Indicates whether to detect all faces, or to only detect the most prominent face | boolean | false |
+| `cropAlgorithm` |  Extended option for controlling crop constraints | CropAlgorithm | CropAlgorithm.THREE_BY_FOUR |
+| `minFaceSize` |  The minimum size percentage, relative to the image, of faces to detect | int | 10 |
+| `debug` |  enables debug log | boolean | false |
 
-> CropAlgorithm.THREE_BY_FOUR : Crops the image in three by four ratio
+> CropAlgorithm.THREE_BY_FOUR : Performs face crop in three by four ratio
 
-> CropAlgorithm.SQUARE        : Crops the image in square(useful when showing face in circular view)
+> CropAlgorithm.SQUARE        : Performs face crop in 1:1 ratio(useful when showing face in circular view)
 
-> CropAlgorithm.LEAST         : Crops the face with minimum possible face area(possibly reduce face overlaps when detecting multiple faces )
+> CropAlgorithm.LEAST         : Performs face crop with minimum padding(possibly reduce face overlap on multi face detection)
 
 ### Face detection result
-Face Detector provides the following values in Result class
+Viola provides the following values in Result class
 
 | Result | Description | Type |
 | :--- | :--- | :--- |
-| `faceCount` |  number of faces croped | int |
-| `facePortraits` |  list of face data croped | FacePortrait |
-| `face` |  bitmap of the cropped face  | Bitmap |
-| `smileProbability` |  giving a probability that the face is smiling  | Float |
-| `leftEyeOpenProbability` |  giving a probability that the face's left eye is open  | Float |
-| `rightEyeOpenProbability` |  giving a probability that the face's right eye is open  | Float |
-| `pixelBetweenEyes` |  number of pixels between the eyes  | Double |
-| `faceSizePercentage` |  the size of face relative to the input image  | Float |
-| `facePose` |  provides rotation of face in X,Y,Z plan  | FacePose |
+| `faceCount` |  The number of faces croped | int |
+| `facePortraits` |  Contains list of cropped faces | FacePortrait |
+| `face` |  The cropped face bitmap  | Bitmap |
+| `smileProbability` |  Giving a probability that the face is smiling  | Float |
+| `leftEyeOpenProbability` |  Giving a probability that the face's left eye is open  | Float |
+| `rightEyeOpenProbability` |  Giving a probability that the face's right eye is open  | Float |
+| `pixelBetweenEyes` |  The number of pixels between the eyes  | Double |
+| `faceSizePercentage` |  The size of face relative to the input image  | Float |
+| `facePose` |  Provides rotation of face in X,Y,Z plane  | FacePose |
 
 ## Author
 Darwin Francis - @darwinfrancis on GitHub, @darwin-francis on linkedin
 
 ## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Implement face detection and cropping from live camera preview.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
