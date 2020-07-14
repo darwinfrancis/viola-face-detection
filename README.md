@@ -3,7 +3,7 @@
 [![API](https://img.shields.io/badge/API-21+-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/darwinfrancis/face-perception/blob/master/LICENSE.txt)
 
-With Viola face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.
+With Viola android face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.
 
 ## Getting Started
 **Compatibility**
@@ -11,7 +11,7 @@ With Viola face detection library, you can detect faces in a bitmap, crop faces 
 
 **Installation**
 
-Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/face-perception-still/com.darwin.face.still/1.0.2) or grab via
+Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/Viola/com.darwin.viola.still/1.0.0) or grab via
 
 Gradle:
 ```gradle
