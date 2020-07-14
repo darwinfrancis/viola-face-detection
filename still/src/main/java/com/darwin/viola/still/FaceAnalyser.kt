@@ -12,7 +12,8 @@ import java.util.*
 import kotlin.math.sqrt
 
 /**
- * The class FaceAnalyser
+ * The class performs analysis on detected face and
+ * crops according to desired cropping algorithm.
  *
  * @author Darwin Francis
  * @version 1.0

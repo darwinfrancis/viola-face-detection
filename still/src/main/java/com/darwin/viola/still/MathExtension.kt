@@ -3,7 +3,7 @@ package com.darwin.viola.still
 import kotlin.math.roundToInt
 
 /**
- * The class MathExtension
+ * The class MathExtension contains extension functions related with Math operation.
  *
  * @author Darwin Francis
  * @version 1.0

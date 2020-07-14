@@ -4,7 +4,7 @@ import com.darwin.viola.still.model.FaceDetectionError
 import com.darwin.viola.still.model.Result
 
 /**
- * The class FaceDetectionListener
+ * The listener used to send callback events to client.
  *
  * @author Darwin Francis
  * @version 1.0

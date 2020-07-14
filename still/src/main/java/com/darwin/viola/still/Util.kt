@@ -3,7 +3,7 @@ package com.darwin.viola.still
 import android.util.Log
 
 /**
- * The class Util
+ * Utility class to manage helper functions
  *
  * @author Darwin Francis
  * @version 1.0
@@ -14,7 +14,7 @@ internal class Util {
         var debug: Boolean = false
         fun printLog(message: String) {
             if (debug)
-                Log.d("FaceDetector", message)
+                Log.d("Viola", message)
         }
     }
 }

@@ -8,7 +8,7 @@ import com.darwin.viola.still.model.FaceOptions
 import com.google.mlkit.vision.face.FaceDetectorOptions
 
 /**
- * The class Viola
+ * The class Viola, Client can use this to process face detection and cropping.
  *
  * @author Darwin Francis
  * @version 1.0
