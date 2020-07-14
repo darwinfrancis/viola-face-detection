@@ -1,22 +1,24 @@
 # Viola
+[ ![Download](https://api.bintray.com/packages/darwinfrancis/Viola/com.darwin.viola.still/images/download.svg) ](https://bintray.com/darwinfrancis/Viola/com.darwin.viola.still/_latestVersion)
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-21+-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/darwinfrancis/face-perception/blob/master/LICENSE.txt)
+
 
 With Viola android face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.
 
 ## Getting Started
 **Compatibility**
- * *Minimum Android SDK* : Viola 1.0.0 requires a minimum API level of 21.
+ * *Minimum Android SDK* : Viola 1.0.1 requires a minimum API level of 21.
 
 **Installation**
 
-Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/Viola/com.darwin.viola.still/1.0.0) or grab via
+Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/Viola/download_file?file_path=com%2Fdarwin%2Fviola%2Fstill%2F1.0.1%2Fstill-1.0.1.aar) or grab via
 
 Gradle:
 ```gradle
 dependencies {
-  implementation 'com.darwin.viola:still:1.0.0'
+  implementation 'com.darwin.viola:still:1.0.1'
 }
 ```
 
@@ -26,7 +28,7 @@ or Maven:
 <dependency>
   <groupId>com.darwin.viola</groupId>
   <artifactId>still</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <type>pom</type>
 </dependency>
 ```
