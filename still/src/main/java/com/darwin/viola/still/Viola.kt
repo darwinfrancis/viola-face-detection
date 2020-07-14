@@ -1,14 +1,14 @@
-package com.darwin.face.still
+package com.darwin.viola.still
 
 import android.graphics.Bitmap
-import com.darwin.face.still.detector.FaceDetectorProcessor
-import com.darwin.face.still.detector.VisionImageProcessor
-import com.darwin.face.still.model.FaceDetectionError
-import com.darwin.face.still.model.FaceOptions
+import com.darwin.viola.still.detector.FaceDetectorProcessor
+import com.darwin.viola.still.detector.VisionImageProcessor
+import com.darwin.viola.still.model.FaceDetectionError
+import com.darwin.viola.still.model.FaceOptions
 import com.google.mlkit.vision.face.FaceDetectorOptions
 
 /**
- * The class FaceDetector
+ * The class Viola
  *
  * @author Darwin Francis
  * @version 1.0
@@ -17,7 +17,7 @@ import com.google.mlkit.vision.face.FaceDetectorOptions
 private const val processingBitmapWidth = 720
 private const val processingBitmapHeight = 1280
 
-class FaceDetector(private val faceDetectionListener: FaceDetectionListener) {
+class Viola(private val faceDetectionListener: FaceDetectionListener) {
 
     private val imageProcessor: VisionImageProcessor
 

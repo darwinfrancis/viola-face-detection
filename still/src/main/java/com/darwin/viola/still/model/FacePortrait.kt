@@ -1,4 +1,4 @@
-package com.darwin.face.still.model
+package com.darwin.viola.still.model
 
 import android.graphics.Bitmap
 

@@ -1,7 +1,7 @@
-package com.darwin.face.still
+package com.darwin.viola.still
 
-import com.darwin.face.still.model.FaceDetectionError
-import com.darwin.face.still.model.Result
+import com.darwin.viola.still.model.FaceDetectionError
+import com.darwin.viola.still.model.Result
 
 /**
  * The class FaceDetectionListener

@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.darwin.face.still.FaceDetectionListener;
-import com.darwin.face.still.FaceDetector;
-import com.darwin.face.still.model.CropAlgorithm;
-import com.darwin.face.still.model.FaceDetectionError;
-import com.darwin.face.still.model.FaceOptions;
-import com.darwin.face.still.model.Result;
+import com.darwin.viola.still.FaceDetectionListener;
+import com.darwin.viola.still.Viola;
+import com.darwin.viola.still.model.CropAlgorithm;
+import com.darwin.viola.still.model.FaceDetectionError;
+import com.darwin.viola.still.model.FaceOptions;
+import com.darwin.viola.still.model.Result;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +38,7 @@ public class FaceCropSampleJavaActivity extends AppCompatActivity {
     private ImageView ivInputImage;
     private TextView tvErrorMessage;
 
-    private FaceDetector faceDetector;
+    private Viola viola;
     private FacePhotoAdapter facePhotoAdapter = new FacePhotoAdapter();
     private Bitmap bitmap;
     private CropAlgorithm cropAlgorithm = CropAlgorithm.THREE_BY_FOUR;
@@ -93,7 +93,7 @@ public class FaceCropSampleJavaActivity extends AppCompatActivity {
     }
 
     private void prepareFaceCropper() {
-        faceDetector = new FaceDetector(listener);
+        viola = new Viola(listener);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.multi_face, options);
@@ -107,7 +107,7 @@ public class FaceCropSampleJavaActivity extends AppCompatActivity {
                 .setMinimumFaceSize(6)
                 .enableDebug()
                 .build();
-        faceDetector.detectFace(bitmap, faceOption);
+        viola.detectFace(bitmap, faceOption);
     }
 
     private final FaceDetectionListener listener = new FaceDetectionListener() {

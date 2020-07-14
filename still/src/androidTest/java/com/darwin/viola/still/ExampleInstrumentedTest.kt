@@ -1,4 +1,4 @@
-package com.darwin.face.still
+package com.darwin.viola.still
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.darwin.face.still.detector
+package com.darwin.viola.still.detector
 
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener

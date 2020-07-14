@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.darwin.face.still.detector
+package com.darwin.viola.still.detector
 
 import android.graphics.Bitmap
-import com.darwin.face.still.FaceAnalyser
-import com.darwin.face.still.FaceDetectionListener
-import com.darwin.face.still.Util
-import com.darwin.face.still.model.FaceDetectionError
-import com.darwin.face.still.model.FaceOptions
-import com.darwin.face.still.model.Result
+import com.darwin.viola.still.FaceAnalyser
+import com.darwin.viola.still.FaceDetectionListener
+import com.darwin.viola.still.Util
+import com.darwin.viola.still.model.FaceDetectionError
+import com.darwin.viola.still.model.FaceOptions
+import com.darwin.viola.still.model.Result
 import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face

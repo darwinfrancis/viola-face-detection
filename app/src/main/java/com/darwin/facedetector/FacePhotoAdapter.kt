@@ -3,7 +3,7 @@ package com.darwin.facedetector
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.darwin.face.still.model.FacePortrait
+import com.darwin.viola.still.model.FacePortrait
 
 /**
  * The class FacePhotoAdapter

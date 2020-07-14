@@ -8,12 +8,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.darwin.face.still.FaceDetectionListener
-import com.darwin.face.still.FaceDetector
-import com.darwin.face.still.model.CropAlgorithm
-import com.darwin.face.still.model.FaceDetectionError
-import com.darwin.face.still.model.FaceOptions
-import com.darwin.face.still.model.Result
+import com.darwin.viola.still.FaceDetectionListener
+import com.darwin.viola.still.Viola
+import com.darwin.viola.still.model.CropAlgorithm
+import com.darwin.viola.still.model.FaceDetectionError
+import com.darwin.viola.still.model.FaceOptions
+import com.darwin.viola.still.model.Result
 import kotlinx.android.synthetic.main.activity_face_crop_sample.*
 import java.io.File
 import java.io.FileInputStream
@@ -27,7 +27,7 @@ import java.io.FileInputStream
  */
 class RegressionTestActivity : AppCompatActivity() {
 
-    private lateinit var faceDetector: FaceDetector
+    private lateinit var viola: Viola
     private lateinit var staggeredLayoutManager: StaggeredGridLayoutManager
     private val faceListAdapter = FacePhotoAdapter()
     private var bitmap: Bitmap? = null
@@ -88,7 +88,7 @@ class RegressionTestActivity : AppCompatActivity() {
     }
 
     private fun prepareFaceCropper() {
-        faceDetector = FaceDetector(listener)
+        viola = Viola(listener)
         val options = BitmapFactory.Options()
         options.inScaled = false
         bitmap = imageList[0]
@@ -106,12 +106,12 @@ class RegressionTestActivity : AppCompatActivity() {
         if (imageIndex < imageList.size) {
             bitmap = imageList[imageIndex]
             iv_input_image.setImageBitmap(bitmap)
-            faceDetector.detectFace(bitmap!!, faceOption)
+            viola.detectFace(bitmap!!, faceOption)
             imageIndex++
         } else {
             imageIndex = 0
         }
-        faceDetector.detectFace(bitmap!!, faceOption)
+        viola.detectFace(bitmap!!, faceOption)
     }
 
     private val listener: FaceDetectionListener = object : FaceDetectionListener {

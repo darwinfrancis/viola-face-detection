@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.darwin.face.still.detector
+package com.darwin.viola.still.detector
 
 import android.graphics.Bitmap
 import com.google.android.gms.tasks.Task
@@ -23,7 +23,7 @@ import com.google.mlkit.vision.common.InputImage
 
 /**
  * Abstract base class for ML Kit frame processors. Subclasses need to implement {@link
- * #onSuccess(T, FrameMetadata, GraphicOverlay)} to define what they want to with the detection
+ * #onSuccess(T, Bitmap)} to define what they want to with the detection
  * results and {@link #detectInImage(VisionImage)} to specify the detector object.
  *
  * @param <T> The type of the detected feature.
