@@ -96,7 +96,7 @@ public class FaceCropSampleJavaActivity extends AppCompatActivity {
         viola = new Viola(listener);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.multi_face, options);
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.po_single, options);
         ivInputImage.setImageBitmap(bitmap);
     }
 
@@ -104,7 +104,7 @@ public class FaceCropSampleJavaActivity extends AppCompatActivity {
         FaceOptions faceOption = new
                 FaceOptions.Builder()
                 .cropAlgorithm(cropAlgorithm)
-                .setMinimumFaceSize(6)
+                .setMinimumFaceSize(15)
                 .enableDebug()
                 .build();
         viola.detectFace(bitmap, faceOption);

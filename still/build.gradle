@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -53,7 +53,7 @@ ext {
     siteUrl = 'https://github.com/darwinfrancis/viola'    // git repo url
     gitUrl = 'https://github.com/darwinfrancis/viola.git' // git repo vcs url
 
-    libraryVersion = '1.0.0'      // library version
+    libraryVersion = '1.0.1'      // library version
 
     developerId = 'darwinfrancis'                // This is your bintray username
     developerName = 'Darwin Francis'              // Developer's name

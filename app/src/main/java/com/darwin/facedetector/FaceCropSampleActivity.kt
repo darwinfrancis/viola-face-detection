@@ -61,7 +61,7 @@ class FaceCropSampleActivity : AppCompatActivity() {
         options.inScaled = false
         bitmap = BitmapFactory.decodeResource(
             resources,
-            R.drawable.multi_face, options
+            R.drawable.po_single, options
         )
         iv_input_image.setImageBitmap(bitmap)
     }
@@ -70,7 +70,7 @@ class FaceCropSampleActivity : AppCompatActivity() {
         val faceOption =
             FaceOptions.Builder()
                 .cropAlgorithm(cropAlgorithm)
-                .setMinimumFaceSize(6)
+                .setMinimumFaceSize(15)
                 .enableDebug()
                 .build()
         viola.detectFace(bitmap!!, faceOption)
