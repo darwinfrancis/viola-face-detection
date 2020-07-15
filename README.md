@@ -7,6 +7,8 @@
 
 With Viola android face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.
 
+![ScreenShot](screenshot/screen_viola_1.jpg)
+
 ## Getting Started
 **Compatibility**
  * *Minimum Android SDK* : Viola 1.0.1 requires a minimum API level of 21.
