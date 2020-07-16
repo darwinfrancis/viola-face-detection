@@ -163,9 +163,10 @@ class VoilaSampleActivity : AppCompatActivity() {
             val options = BitmapFactory.Options()
             options.inPreferredConfig = Bitmap.Config.ARGB_8888
             bitmap = BitmapFactory.decodeFile(imagePath, options)
+            bitmap = Util.modifyOrientation(bitmap!!, imagePath!!)
             iv_input_image.setImageBitmap(bitmap)
             faceListAdapter.bindData(emptyList())
-            cursor?.close()
+            cursor.close()
         }
     }
 

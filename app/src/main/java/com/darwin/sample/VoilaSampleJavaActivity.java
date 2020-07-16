@@ -33,6 +33,7 @@ import com.darwin.viola.still.model.Result;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,8 +194,13 @@ public class VoilaSampleJavaActivity extends AppCompatActivity {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             bitmap = BitmapFactory.decodeFile(imagePath, options);
-            ivInputImage.setImageBitmap(bitmap);
-            facePhotoAdapter.bindData(new ArrayList<FacePortrait>());
+            try {
+                bitmap = Util.Companion.modifyOrientation(bitmap, imagePath);
+                ivInputImage.setImageBitmap(bitmap);
+                facePhotoAdapter.bindData(new ArrayList<FacePortrait>());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             cursor.close();
         }
     }
