@@ -3,7 +3,6 @@ package com.darwin.sample
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -27,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_face_crop_sample.iv_input_image
 import kotlinx.android.synthetic.main.activity_face_crop_sample.radio_algorithm
 import kotlinx.android.synthetic.main.activity_face_crop_sample.rvCroppedImages
 import kotlinx.android.synthetic.main.activity_face_crop_sample.tvErrorMessage
-import kotlinx.android.synthetic.main.activity_voila_sample.*
+import kotlinx.android.synthetic.main.activity_viola_sample.*
 
 
 /**
@@ -37,7 +36,7 @@ import kotlinx.android.synthetic.main.activity_voila_sample.*
  * @version 1.0
  * @since 15 Jul 2020
  */
-class VoilaSampleActivity : AppCompatActivity() {
+class ViolaSampleActivity : AppCompatActivity() {
 
     private lateinit var viola: Viola
     private lateinit var staggeredLayoutManager: StaggeredGridLayoutManager
@@ -50,7 +49,7 @@ class VoilaSampleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_voila_sample)
+        setContentView(R.layout.activity_viola_sample)
         permissionHelper = PermissionHelper(this)
         initializeUI()
         setEventListeners()
@@ -154,19 +153,13 @@ class VoilaSampleActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == imagePickerIntentId && resultCode == Activity.RESULT_OK) {
             val pickedImage: Uri = data?.data!!
-            val filePath =
-                arrayOf(MediaStore.Images.Media.DATA)
-            val cursor: Cursor? =
-                contentResolver.query(pickedImage, filePath, null, null, null)
-            cursor?.moveToFirst()
-            val imagePath: String? = cursor?.getString(cursor.getColumnIndex(filePath[0]))
+            val imagePath = Util.getPath(this, pickedImage)
             val options = BitmapFactory.Options()
             options.inPreferredConfig = Bitmap.Config.ARGB_8888
             bitmap = BitmapFactory.decodeFile(imagePath, options)
             bitmap = Util.modifyOrientation(bitmap!!, imagePath!!)
             iv_input_image.setImageBitmap(bitmap)
             faceListAdapter.bindData(emptyList())
-            cursor.close()
         }
     }
 
