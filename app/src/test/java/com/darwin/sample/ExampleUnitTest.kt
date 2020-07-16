@@ -1,4 +1,4 @@
-package com.darwin.facedetector
+package com.darwin.sample
 
 import org.junit.Test
 

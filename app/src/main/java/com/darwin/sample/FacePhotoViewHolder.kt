@@ -1,4 +1,4 @@
-package com.darwin.facedetector
+package com.darwin.sample
 
 import android.view.View
 import android.widget.ImageView
