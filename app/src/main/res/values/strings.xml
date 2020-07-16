@@ -4,4 +4,5 @@
     <string name="rb_square">Square</string>
     <string name="rb_least">Least</string>
     <string name="bt_crop">CROP</string>
+    <string name="bt_image">Image</string>
 </resources>

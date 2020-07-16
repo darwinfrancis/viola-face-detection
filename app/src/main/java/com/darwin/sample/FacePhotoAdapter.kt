@@ -1,4 +1,4 @@
-package com.darwin.facedetector
+package com.darwin.sample
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
