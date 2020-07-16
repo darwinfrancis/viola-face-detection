@@ -10,6 +10,10 @@ With Viola android face detection library, you can detect faces in a bitmap, cro
 ![ScreenShot](screenshot/screen_viola_1.jpg)
 
 ## Getting Started
+**Demo application**
+
+Download sample application [sample_v_1.0.1](app-voila-sample.apk)
+
 **Compatibility**
  * *Minimum Android SDK* : Viola 1.0.1 requires a minimum API level of 21.
 
@@ -89,7 +93,7 @@ Viola is currently extended with the following configurations. Instructions on h
 | :--- | :--- | :--- | :--- |
 | `prominentFaceDetection` |  Indicates whether to detect all faces, or to only detect the most prominent face | boolean | false |
 | `cropAlgorithm` |  Extended option for controlling crop constraints | CropAlgorithm | CropAlgorithm.THREE_BY_FOUR |
-| `minFaceSize` |  The minimum size percentage, relative to the image, of faces to detect | int | 10 |
+| `minFaceSize` |  The minimum size percentage, relative to the image, of faces to detect | int | 15 |
 | `debug` |  enables debug log | boolean | false |
 
 > CropAlgorithm.THREE_BY_FOUR : Performs face crop in three by four ratio
