@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:targetApi="q">
         <activity
-            android:name="com.darwin.sample.VoilaSampleActivity"
+            android:name="com.darwin.sample.ViolaSampleActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>

@@ -2,13 +2,11 @@ package com.darwin.sample;
 
 import android.Manifest;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,6 +32,7 @@ import com.darwin.viola.still.model.Result;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,7 @@ import java.util.List;
  * @version 1.0
  * @since 13 Jul 2020
  */
-public class VoilaSampleJavaActivity extends AppCompatActivity {
+public class ViolaSampleJavaActivity extends AppCompatActivity {
 
     private Button btCrop, btImage;
     private RadioGroup radioAlgorithm;
@@ -62,7 +61,7 @@ public class VoilaSampleJavaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_voila_sample);
+        setContentView(R.layout.activity_viola_sample);
         permissionHelper = new PermissionHelper(this);
         initializeUI();
         setEventListeners();
@@ -186,22 +185,22 @@ public class VoilaSampleJavaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == imagePickerIntentId && resultCode == RESULT_OK && data != null) {
             Uri pickedImage = data.getData();
-            String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
-            cursor.moveToFirst();
-            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            bitmap = BitmapFactory.decodeFile(imagePath, options);
+            String imagePath;
             try {
-                bitmap = Util.Companion.modifyOrientation(bitmap, imagePath);
-                ivInputImage.setImageBitmap(bitmap);
-                facePhotoAdapter.bindData(new ArrayList<FacePortrait>());
-            } catch (IOException e) {
+                imagePath = Util.Companion.getPath(ViolaSampleJavaActivity.this, pickedImage);
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                bitmap = BitmapFactory.decodeFile(imagePath, options);
+                try {
+                    bitmap = Util.Companion.modifyOrientation(bitmap, imagePath);
+                    ivInputImage.setImageBitmap(bitmap);
+                    facePhotoAdapter.bindData(new ArrayList<FacePortrait>());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-            cursor.close();
         }
     }
 
