@@ -12,19 +12,19 @@ With Viola android face detection library, you can detect faces in a bitmap, cro
 ## Getting Started
 **Demo application**
 
-Download sample application [sample_v_1.0.1](app-voila-sample.apk)
+Download sample application [sample_v_1.0.2](app-voila-sample.apk)
 
 **Compatibility**
- * *Minimum Android SDK* : Viola 1.0.1 requires a minimum API level of 21.
+ * *Minimum Android SDK* : Viola 1.0.2 requires a minimum API level of 21.
 
 **Installation**
 
-Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/Viola/download_file?file_path=com%2Fdarwin%2Fviola%2Fstill%2F1.0.1%2Fstill-1.0.1.aar) or grab via
+Download the latest aar from [JCenter](https://bintray.com/darwinfrancis/Viola/download_file?file_path=com%2Fdarwin%2Fviola%2Fstill%2F1.0.2%2Fstill-1.0.2.aar) or grab via
 
 Gradle:
 ```gradle
 dependencies {
-  implementation 'com.darwin.viola:still:1.0.1'
+  implementation 'com.darwin.viola:still:1.0.2'
 }
 ```
 
@@ -34,7 +34,7 @@ or Maven:
 <dependency>
   <groupId>com.darwin.viola</groupId>
   <artifactId>still</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 ```
