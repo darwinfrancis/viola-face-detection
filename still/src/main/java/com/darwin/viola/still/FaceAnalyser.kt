@@ -11,6 +11,7 @@ import com.google.mlkit.vision.face.Face
 import java.util.*
 import kotlin.math.sqrt
 
+
 /**
  * The class performs analysis on detected face and
  * crops according to desired cropping algorithm.
@@ -95,6 +96,7 @@ internal class FaceAnalyser {
                 croppedBitmap.height.toFloat(),
                 bitmap
             )
+
             val facePose = FacePose(
                 eulerValueToAngle(face.headEulerAngleX),
                 eulerValueToAngle(face.headEulerAngleY),
@@ -217,10 +219,13 @@ internal class FaceAnalyser {
 
         val heightTopOffset = (eyeDistance / 2).toInt()
         val heightBottomOffset = heightTopOffset / 2
-        val startX = face.boundingBox.left
+        var startX = face.boundingBox.left
         var startY = face.boundingBox.top - heightTopOffset
         var width = face.boundingBox.width()
         var height = face.boundingBox.height() + heightTopOffset + heightBottomOffset
+        if (startX < 0) {
+            startX = 0
+        }
         if (startY < 0) {
             startY = 0
         }
