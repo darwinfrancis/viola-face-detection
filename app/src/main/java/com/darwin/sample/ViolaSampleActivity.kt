@@ -129,7 +129,7 @@ class ViolaSampleActivity : AppCompatActivity() {
         val faceOption =
             FaceOptions.Builder()
                 .cropAlgorithm(cropAlgorithm)
-                .setMinimumFaceSize(6)
+                //.setMinimumFaceSize(6)
                 .enableDebug()
                 .build()
         viola.detectFace(bitmap!!, faceOption)

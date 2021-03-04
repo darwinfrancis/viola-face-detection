@@ -48,7 +48,7 @@ ext {
     libraryName = 'viola'     // this is the module name of library
     artifact = 'still'        // this is the artifact we want to see in implementation line
 
-    libraryDescription = 'Face detection library description' // description of library
+    libraryDescription = 'With Viola android face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.' // description of library
 
     siteUrl = 'https://github.com/darwinfrancis/viola'    // git repo url
     gitUrl = 'https://github.com/darwinfrancis/viola.git' // git repo vcs url
