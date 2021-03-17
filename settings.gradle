@@ -1,3 +1,4 @@
-rootProject.name='Face Detector'
+rootProject.name='Viola Still'
 include ':app'
 include ':still'
+include ':age'

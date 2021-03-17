@@ -1,5 +1,6 @@
 package com.darwin.sample
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class FacePhotoViewHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickLis
     fun bind(face: FacePortrait) {
         photo = face
         view.findViewById<ImageView>(R.id.iv_face).setImageBitmap(face.face)
-        //(view as ImageView).setImageBitmap(face.face)
+        Log.e("FACE",face.toString())
     }
 
     init {
