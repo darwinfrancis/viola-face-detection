@@ -12,12 +12,14 @@ class FaceOptions private constructor(builder: Builder) {
     val prominentFaceDetection: Boolean
     val cropAlgorithm: CropAlgorithm
     val minimumFaceSize: Int
+    val ageClassification: Boolean
     val debug: Boolean
 
     init {
         this.prominentFaceDetection = builder.prominentFaceDetection
         this.cropAlgorithm = builder.cropAlgorithm
         this.minimumFaceSize = builder.minimumFaceSize
+        this.ageClassification = builder.ageClassification
         this.debug = builder.debug
     }
 
@@ -28,12 +30,15 @@ class FaceOptions private constructor(builder: Builder) {
             private set
         var minimumFaceSize: Int = 15
             private set
+        var ageClassification: Boolean = false
+            private set
         var debug: Boolean = false
             private set
 
         fun enableProminentFaceDetection() = apply { this.prominentFaceDetection = true }
         fun cropAlgorithm(algorithm: CropAlgorithm) = apply { this.cropAlgorithm = algorithm }
         fun setMinimumFaceSize(faceSize: Int) = apply { this.minimumFaceSize = faceSize }
+        fun enableAgeClassification() = apply { this.ageClassification = true }
         fun enableDebug() = apply { this.debug = true }
         fun build() = FaceOptions(this)
     }

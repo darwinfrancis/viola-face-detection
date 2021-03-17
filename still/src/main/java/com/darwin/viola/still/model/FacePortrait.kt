@@ -16,10 +16,11 @@ data class FacePortrait(
     val rightEyeOpenProbability: Float,
     val pixelBetweenEyes: Double,
     val faceSizePercentage: Float,
-    val facePose: FacePose
+    val facePose: FacePose,
+    val ageRange: String?
 ) {
 
     override fun toString(): String {
-        return "FacePortrait(face=$face, smileProbability=$smileProbability, leftEyeOpenProbability=$leftEyeOpenProbability, rightEyeOpenProbability=$rightEyeOpenProbability, pixelBetweenEyes=$pixelBetweenEyes, faceSizePercentage=$faceSizePercentage, facePose=$facePose)"
+        return "FacePortrait(face=$face, smileProbability=$smileProbability, leftEyeOpenProbability=$leftEyeOpenProbability, rightEyeOpenProbability=$rightEyeOpenProbability, pixelBetweenEyes=$pixelBetweenEyes, faceSizePercentage=$faceSizePercentage, facePose=$facePose, ageRange=$ageRange)"
     }
 }
