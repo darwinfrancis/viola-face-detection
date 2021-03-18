@@ -94,6 +94,7 @@ Viola is currently extended with the following configurations. Instructions on h
 | `prominentFaceDetection` |  Indicates whether to detect all faces, or to only detect the most prominent face | boolean | false |
 | `cropAlgorithm` |  Extended option for controlling crop constraints | CropAlgorithm | CropAlgorithm.THREE_BY_FOUR |
 | `minFaceSize` |  The minimum size percentage, relative to the image, of faces to detect | int | 15 |
+| `ageClassification` |  Indicate whether to enable age classification on detected face | boolean | false |
 | `debug` |  enables debug log | boolean | false |
 
 > CropAlgorithm.THREE_BY_FOUR : Performs face crop in three by four ratio
@@ -101,6 +102,8 @@ Viola is currently extended with the following configurations. Instructions on h
 > CropAlgorithm.SQUARE        : Performs face crop in 1:1 ratio(useful when showing face in circular view)
 
 > CropAlgorithm.LEAST         : Performs face crop with minimum padding(possibly reduce face overlap on multi face detection)
+
+NOTE : add ```implementation 'com.darwin.viola:age:1.0.0'``` dependency to your application build.gradle file and ``viola.addAgeClassificationPlugin(this)`` to your viola sdk instance for `ageClassification` feature to work on detected face.
 
 ### Face detection result
 Viola provides the following values in Result class
@@ -116,12 +119,14 @@ Viola provides the following values in Result class
 | `pixelBetweenEyes` |  The number of pixels between the eyes  | Double |
 | `faceSizePercentage` |  The size of face relative to the input image  | Float |
 | `facePose` |  Provides rotation of face in X,Y,Z plane  | FacePose |
+| `ageRange` |  Provides age range of detected face(s)  | String |
 
 ## Author
 Darwin Francis - @darwinfrancis on GitHub, @darwin-francis on linkedin
 
 ## Roadmap
--Add gender classification available as plugin
+-Add gender classification feature as plugin<br/>
+-Add emotion classification feature as plugin<br/>
 -Implement face detection and cropping from live camera preview.
 
 ## Contributing
