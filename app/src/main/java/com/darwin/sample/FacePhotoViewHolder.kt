@@ -1,8 +1,8 @@
 package com.darwin.sample
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.darwin.viola.still.model.FacePortrait
 
@@ -20,7 +20,10 @@ class FacePhotoViewHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickLis
     fun bind(face: FacePortrait) {
         photo = face
         view.findViewById<ImageView>(R.id.iv_face).setImageBitmap(face.face)
-        Log.e("FACE",face.toString())
+        face.ageRange?.let {
+            val ageRange = "Age: $it"
+            view.findViewById<TextView>(R.id.tvAge).text = ageRange
+        }
     }
 
     init {
