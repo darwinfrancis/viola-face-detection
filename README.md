@@ -44,6 +44,8 @@ or Maven:
 **Kotlin**
 ```kotlin
 val viola = Viola(listener)
+viola.addAgeClassificationPlugin(context) //optional, available via external dependency
+
 viola.detectFace(bitmap)
 
 private val listener: FaceDetectionListener = object : FaceDetectionListener {
@@ -67,6 +69,7 @@ viola.detectFace(bitmap,faceOption)
 **Java**
 ```java
 Viola viola = new Viola(listener);
+viola.addAgeClassificationPlugin(context) //optional, available via external dependency
 viola.detectFace(bitmap);
 
 private final FaceDetectionListener listener = new FaceDetectionListener() {
