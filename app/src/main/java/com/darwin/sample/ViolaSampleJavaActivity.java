@@ -148,6 +148,8 @@ public class ViolaSampleJavaActivity extends AppCompatActivity {
 
     private void prepareFaceCropper() {
         viola = new Viola(listener);
+        viola.addAgeClassificationPlugin(this);
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.po_single, options);
@@ -159,6 +161,7 @@ public class ViolaSampleJavaActivity extends AppCompatActivity {
                 FaceOptions.Builder()
                 .cropAlgorithm(cropAlgorithm)
                 .setMinimumFaceSize(6)
+                .enableAgeClassification()
                 .enableDebug()
                 .build();
         viola.detectFace(bitmap, faceOption);

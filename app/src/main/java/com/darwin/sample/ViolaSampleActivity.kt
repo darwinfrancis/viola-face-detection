@@ -116,6 +116,8 @@ class ViolaSampleActivity : AppCompatActivity() {
 
     private fun prepareFaceCropper() {
         viola = Viola(listener)
+        viola.addAgeClassificationPlugin(this)
+
         val options = BitmapFactory.Options()
         options.inScaled = false
         bitmap = BitmapFactory.decodeResource(
@@ -129,7 +131,8 @@ class ViolaSampleActivity : AppCompatActivity() {
         val faceOption =
             FaceOptions.Builder()
                 .cropAlgorithm(cropAlgorithm)
-                //.setMinimumFaceSize(6)
+                .setMinimumFaceSize(6)
+                .enableAgeClassification()
                 .enableDebug()
                 .build()
         viola.detectFace(bitmap!!, faceOption)
@@ -148,6 +151,7 @@ class ViolaSampleActivity : AppCompatActivity() {
             faceListAdapter.bindData(emptyList())
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

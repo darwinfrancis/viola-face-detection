@@ -48,7 +48,8 @@ internal class FaceAnalyser {
                 getProminentFace(faces)!!,
                 bitmap,
                 faceOptions.cropAlgorithm,
-                faceOptions.minimumFaceSize
+                faceOptions.minimumFaceSize,
+                faceOptions.ageClassification
             )
         if (portrait != null) {
             Util.printLog("Face crop succeeded with {CropAlgorithm.${faceOptions.cropAlgorithm})} algorithm.")
@@ -66,7 +67,13 @@ internal class FaceAnalyser {
         val facePortraits: MutableList<FacePortrait> = mutableListOf()
         faces.forEach {
             val portrait =
-                processFace(it, bitmap, faceOptions.cropAlgorithm, faceOptions.minimumFaceSize)
+                processFace(
+                    it,
+                    bitmap,
+                    faceOptions.cropAlgorithm,
+                    faceOptions.minimumFaceSize,
+                    faceOptions.ageClassification
+                )
             if (portrait != null) {
                 Util.printLog("Face crop succeeded with {CropAlgorithm.${faceOptions.cropAlgorithm}} algorithm.")
                 facePortraits.add(portrait)
@@ -80,7 +87,8 @@ internal class FaceAnalyser {
         face: Face,
         bitmap: Bitmap,
         cropAlgorithm: CropAlgorithm,
-        minFaceSize: Int
+        minFaceSize: Int,
+        ageClassification: Boolean
     ): FacePortrait? {
         Util.printLog("Processing face with {CropAlgorithm.$cropAlgorithm} algorithm.")
         var faceSize = getFaceSizePercentage(face, bitmap, cropAlgorithm)
@@ -102,6 +110,9 @@ internal class FaceAnalyser {
                 eulerValueToAngle(face.headEulerAngleY),
                 eulerValueToAngle(face.headEulerAngleZ)
             )
+
+            val ageRange = if (ageClassification) getAgeRange(croppedBitmap) else null
+
             return FacePortrait(
                 croppedBitmap,
                 smileProbability,
@@ -109,7 +120,8 @@ internal class FaceAnalyser {
                 rightEyeOpenProbability,
                 pixelBetweenEyes,
                 faceSize,
-                facePose
+                facePose,
+                ageRange
             )
         } else {
             Util.printLog("The face size{$faceSize} is below minimum threshold value{${minFaceSize}}, skipping face.")
@@ -357,4 +369,8 @@ internal class FaceAnalyser {
         value + 360
     } else value
 
+    private fun getAgeRange(bitmap: Bitmap): String {
+        val result = Viola.ageClassifier!!.findAgeSynchronized(bitmap)
+        return result[0].range
+    }
 }
