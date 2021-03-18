@@ -70,6 +70,7 @@ viola.detectFace(bitmap,faceOption)
 ```java
 Viola viola = new Viola(listener);
 viola.addAgeClassificationPlugin(context) //optional, available via external dependency
+
 viola.detectFace(bitmap);
 
 private final FaceDetectionListener listener = new FaceDetectionListener() {
