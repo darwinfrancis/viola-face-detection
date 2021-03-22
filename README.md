@@ -107,7 +107,7 @@ Viola is currently extended with the following configurations. Instructions on h
 
 > CropAlgorithm.LEAST         : Performs face crop with minimum padding(possibly reduce face overlap on multi face detection)
 
-NOTE : add ```implementation 'com.darwin.viola:age:1.0.0'``` dependency to your application build.gradle file and ``viola.addAgeClassificationPlugin(this)`` to your viola sdk instance for `ageClassification` feature to work on detected face.
+NOTE : add [viola-age](https://github.com/darwinfrancis/viola-age) dependency to your application build.gradle file and ``viola.addAgeClassificationPlugin(this)`` to your viola sdk instance for `ageClassification` feature to work on detected face.
 
 ### Face detection result
 Viola provides the following values in Result class
@@ -132,6 +132,10 @@ Darwin Francis - @darwinfrancis on GitHub, @darwin-francis on linkedin
 -Add gender classification feature as plugin<br/>
 -Add emotion classification feature as plugin<br/>
 -Implement face detection and cropping from live camera preview.
+
+## Other works
+[Viola-Age](https://github.com/darwinfrancis/viola-age) age classification library for android.
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
