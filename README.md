@@ -5,7 +5,14 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/darwinfrancis/face-perception/blob/master/LICENSE.txt)
 
 
-With Viola android face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.
+Viola android face detection library detects faces automatically from a bitmap, crop faces using the predefined algorithms, and provides supplementary information of the detected faces.
+
+Features:<br/>
+-> Prominent face detection<br/>
+-> Multiple face detection<br/>
+-> Automatic face crop<br/>
+-> Face classification information<br/>
+-> Age classification support<br/>
 
 ![ScreenShot](screenshot/screen_viola_1.jpg)
 
