@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: './versioning.gradle'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
@@ -44,29 +45,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
-ext {
-    bintrayRepo = 'Viola' // Repo name in bintray dashboard
-    bintrayName = 'com.darwin.viola.still' // package name of the bintray repo
+afterEvaluate {
+    publishing{
+        publications{
+            release(MavenPublication){
+                from components.release
 
-    publishedGroupId = 'com.darwin.viola'   // this is the ID we want to see in implementation line
-    libraryName = 'viola'     // this is the module name of library
-    artifact = 'still'        // this is the artifact we want to see in implementation line
-
-    libraryDescription = 'With Viola android face detection library, you can detect faces in a bitmap, crop faces using predefined algorithm and get additional information from the detected faces.' // description of library
-
-    siteUrl = 'https://github.com/darwinfrancis/viola'    // git repo url
-    gitUrl = 'https://github.com/darwinfrancis/viola.git' // git repo vcs url
-
-    libraryVersion = '1.1.1'      // library version
-
-    developerId = 'darwinfrancis'                // This is your bintray username
-    developerName = 'Darwin Francis'              // Developer's name
-    developerEmail = 'darwinfrancis13@gmail.com'                // Developer's email
-
-    licenseName = 'The MIT License'  // for example, The Apache Software License, Version 2.0
-    licenseUrl = 'https://github.com/darwinfrancis/viola/blob/master/LICENSE.txt'   // for example, http://www.apache.org/licenses/LICENSE-2.0.txt
-    allLicenses = ["MIT"]    // array of licenses, for example, ["Apache-2.0"]
+                groupId = 'com.darwin.viola'
+                artifactId = 'still'
+                version '1.1.1'
+            }
+        }
+    }
 }
-
-
-apply from: 'publish.gradle'
