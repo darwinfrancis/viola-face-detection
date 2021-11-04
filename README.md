@@ -19,7 +19,7 @@ Features:<br/>
 ## Getting Started
 **Demo application**
 
-Download sample application [sample_v_1.1.1](app-voila-sample.apk)
+Download sample application [sample_v_1.1.1](https://raw.githubusercontent.com/darwinfrancis/viola/master/app-viola-sample.apk)
 
 **Compatibility**
  * *Minimum Android SDK* : Viola 1.1.3 requires a minimum API level of 21.
