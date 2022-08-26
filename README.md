@@ -1,5 +1,5 @@
 # Viola
-[ ![Download](https://jitpack.io/v/darwinfrancis/viola.svg) ](https://github.com/darwinfrancis/viola/releases/download/1.1.3/still-1.1.3.aar)
+[ ![Download](https://jitpack.io/v/darwinfrancis/viola.svg) ](https://github.com/darwinfrancis/viola/releases/download/1.1.4/still-1.1.4.aar)
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-21+-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/darwinfrancis/face-perception/blob/master/LICENSE.txt)
@@ -26,7 +26,7 @@ Download sample application [sample_v_1.1.1](https://raw.githubusercontent.com/d
 
 **Installation**
 
-Download the latest aar from [jitpack](https://github.com/darwinfrancis/viola/releases/download/1.1.3/still-1.1.3.aar) or grab via
+Download the latest aar from [jitpack](https://github.com/darwinfrancis/viola/releases/download/1.1.4/still-1.1.4.aar) or grab via
 
 root build.gradle:
 ```gradle
@@ -41,7 +41,7 @@ allprojects {
 app build.gradle:
 ```gradle
 dependencies {
-  implementation 'com.github.darwinfrancis:viola:1.1.3'
+  implementation 'com.github.darwinfrancis:viola:1.1.4'
 }
 ```
 
@@ -51,7 +51,7 @@ or Maven:
 <dependency>
   <groupId>com.github.darwinfrancis</groupId>
   <artifactId>viola</artifactId>
-  <version>1.1.3</version>
+  <version>1.1.4</version>
   <type>pom</type>
 </dependency>
 ```
