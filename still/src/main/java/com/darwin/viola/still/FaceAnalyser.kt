@@ -93,36 +93,42 @@ internal class FaceAnalyser {
         Util.printLog("Processing face with {CropAlgorithm.$cropAlgorithm} algorithm.")
         var faceSize = getFaceSizePercentage(face, bitmap, cropAlgorithm)
         if (faceSize >= minFaceSize) {
+
             val portraitData = cropFace(face, bitmap, cropAlgorithm)
-            val croppedBitmap = portraitData.first
-            val smileProbability = face.smilingProbability!!.roundFloat()
-            val leftEyeOpenProbability = face.leftEyeOpenProbability!!.roundFloat()
-            val rightEyeOpenProbability = face.rightEyeOpenProbability!!.roundFloat()
-            val pixelBetweenEyes = portraitData.second.roundDouble()
-            faceSize = getAreaOfFaceRelativeToBitmap(
-                croppedBitmap.width.toFloat(),
-                croppedBitmap.height.toFloat(),
-                bitmap
-            )
+            portraitData?.let {
+                val croppedBitmap = portraitData.first
+                val smileProbability = face.smilingProbability!!.roundFloat()
+                val leftEyeOpenProbability = face.leftEyeOpenProbability!!.roundFloat()
+                val rightEyeOpenProbability = face.rightEyeOpenProbability!!.roundFloat()
+                val pixelBetweenEyes = portraitData.second.roundDouble()
+                faceSize = getAreaOfFaceRelativeToBitmap(
+                    croppedBitmap.width.toFloat(),
+                    croppedBitmap.height.toFloat(),
+                    bitmap
+                )
 
-            val facePose = FacePose(
-                eulerValueToAngle(face.headEulerAngleX),
-                eulerValueToAngle(face.headEulerAngleY),
-                eulerValueToAngle(face.headEulerAngleZ)
-            )
+                val facePose = FacePose(
+                    eulerValueToAngle(face.headEulerAngleX),
+                    eulerValueToAngle(face.headEulerAngleY),
+                    eulerValueToAngle(face.headEulerAngleZ)
+                )
 
-            val ageRange = if (ageClassification) getAgeRange(croppedBitmap) else null
+                val ageRange = if (ageClassification) getAgeRange(croppedBitmap) else null
 
-            return FacePortrait(
-                croppedBitmap,
-                smileProbability,
-                leftEyeOpenProbability,
-                rightEyeOpenProbability,
-                pixelBetweenEyes,
-                faceSize,
-                facePose,
-                ageRange
-            )
+                return FacePortrait(
+                    croppedBitmap,
+                    smileProbability,
+                    leftEyeOpenProbability,
+                    rightEyeOpenProbability,
+                    pixelBetweenEyes,
+                    faceSize,
+                    facePose,
+                    ageRange
+                )
+            } ?: run {
+                Util.printLog("Unable to crop the face, please check exception for details. skipping face.")
+                return null
+            }
         } else {
             Util.printLog("The face size{$faceSize} is below minimum threshold value{${minFaceSize}}, skipping face.")
             return null
@@ -133,7 +139,7 @@ internal class FaceAnalyser {
         face: Face,
         bitmap: Bitmap,
         cropAlgorithm: CropAlgorithm
-    ): Pair<Bitmap, Double> {
+    ): Pair<Bitmap, Double>? {
         Util.printLog("Face crop with {CropAlgorithm.$cropAlgorithm} algorithm is started.")
         if (cropAlgorithm == CropAlgorithm.LEAST) {
             return cropFaceByLeastAlgorithm(face, bitmap)
@@ -216,9 +222,14 @@ internal class FaceAnalyser {
                 finalHeight -= heightRemainder
             }
 
-            val croppedBitmap =
-                Bitmap.createBitmap(bitmap, finalStartX, finalStartY, finalWidth, finalHeight)
-            return Pair(croppedBitmap, eyeDistance)
+            try {
+                val croppedBitmap =
+                    Bitmap.createBitmap(bitmap, finalStartX, finalStartY, finalWidth, finalHeight)
+                return Pair(croppedBitmap, eyeDistance)
+            } catch (e: IllegalArgumentException) {
+                Util.printLog("Exception occurred when cropping image with {CropAlgorithm.$cropAlgorithm}, Exception: ${e.message}")
+            }
+            return null
         }
     }
 
@@ -226,7 +237,7 @@ internal class FaceAnalyser {
     private fun cropFaceByLeastAlgorithm(
         face: Face,
         bitmap: Bitmap
-    ): Pair<Bitmap, Double> {
+    ): Pair<Bitmap, Double>? {
         val eyeDistance = getPixelBetweenEyes(face)
 
         val heightTopOffset = (eyeDistance / 2).toInt()
@@ -260,14 +271,21 @@ internal class FaceAnalyser {
             height -= heightRemainder
         }
 
-        val croppedBitmap = Bitmap.createBitmap(
-            bitmap,
-            startX,
-            startY,
-            width,
-            height
-        )
-        return Pair(croppedBitmap, eyeDistance)
+
+
+        try {
+            val croppedBitmap = Bitmap.createBitmap(
+                bitmap,
+                startX,
+                startY,
+                width,
+                height
+            )
+            return Pair(croppedBitmap, eyeDistance)
+        } catch (e: IllegalArgumentException) {
+            Util.printLog("Exception occurred when cropping image with {CropAlgorithm.LEAST}, Exception: ${e.message}")
+        }
+        return null
     }
 
     private fun getFaceSizePercentage(
